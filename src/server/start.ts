@@ -43,7 +43,7 @@ function useTemplate(template: string, page: string, res: any, data: any) {
 function startServer() {
 	const config = CONFIG.server
 	const server = HTTP.createServer(expressServer(config))
-	server.listen(config.port, () => console.log(config.connectMessage(config)))
+	server.listen(config.port, () => console.log(config.onConnect(config)))
 }
 
 export {

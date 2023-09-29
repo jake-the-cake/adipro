@@ -1,22 +1,28 @@
 import { ServerConfig } from "../server/types"
+import dotenv from 'dotenv'
+import { returnConnectionMessage } from "./messages"
+
+dotenv.config()
 
 interface Config {
 	server: ServerConfig
-	templates: TemplatesConfig
+	www: WwwConfig
 }
 
-interface TemplatesConfig {
-	dir: string
+interface WwwConfig {
+	templates: string
+	pages: string
 }
 
 const CONFIG: Config = {
 	server: {
 		port: process.env.PORT || 3000,
 		name: 'Adipro Health',
-		connectMessage: ({name, port}) => `${ name ? name + ' server' : 'Server'} connection established on port ${ port }.`,
+		onConnect: returnConnectionMessage
 	},
-	templates: {
-		dir: '/assets'
+	www: {
+		templates: '/assets/templates',
+		pages: '/assets/pages'
 	}
 }
 
