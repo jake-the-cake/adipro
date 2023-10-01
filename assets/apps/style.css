@@ -1,0 +1,91 @@
+:root {
+  --primary-hue: 3;
+  --secondary-hue: 69;
+
+  --primary: var(--primary-hue), 100%, 37%;
+  --secondary: var(--secondary-hue), 100%, 37%;
+
+  --light: var(--primary-hue), 100%, 96%;
+  --dark: var(--primary-hue), 100%, 9%;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: hsl(var(--primary));
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 2rem;
+}
+
+.slimnav__container {
+  background-color: hsl(var(--dark));
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 0px;
+  padding-inline: 1rem;
+  color: hsl(var(--light));
+}
+
+.slimnav__title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1rem;
+  overflow-y: hidden;
+}
+
+.slimnav__links a {
+  color: hsl(var(--secondary), .7);
+  font-size: .7rem;
+  letter-spacing: 1.2px;
+  text-underline-offset: .7px;
+}
+
+.slimnav__links a:hover {
+  color: hsl(var(--secondary), .9);
+}
+
+.text-primary {
+  color: hsl(var(--primary));
+}
+
+.app__container {
+  background-color: hsl(var(--light));
+}
+
+.form-app {
+  max-width: 500px;
+  width: 100%;
+  height: fit-content;
+  padding: 1rem;
+}
+
+.form-app__header {
+  display: flex;
+  background-color: hsl(var(--dark));
+  color: hsl(var(--light));
+  overflow: hidden;
+}
+
+.form-app__title--outer {
+  overflow: hidden;
+  transition: width .3s ease;
+  position: relative;
+}
+
+.form-app__title--inner {
+  font-size: 1.4rem;
+  padding: .3rem;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}

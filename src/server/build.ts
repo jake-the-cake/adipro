@@ -37,5 +37,6 @@ function changeDirectory(path: string, value: string | number): string {
 }
 
 export {
-	Template
+	Template,
+	changeDirectory
 }

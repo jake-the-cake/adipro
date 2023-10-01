@@ -1,9 +1,9 @@
 import HTTP from "http"
-import express from "express"
+import express, { NextFunction, Request, Response } from "express"
 import cors from 'cors'
 import CONFIG from "../config"
 import { ServerConfig } from "./types"
-import { Template } from "./build"
+import { Template, changeDirectory } from "./build"
 
 function expressServer(config: ServerConfig) {
 	const app = express()
@@ -11,12 +11,26 @@ function expressServer(config: ServerConfig) {
 	app.use(express.json())
 	app.use(express.urlencoded({ extended: false }))
 
+	app.use(express.static('assets', {}))
+	
 	app.get('/', async (req, res) => {
 		useTemplate('index', 'test', res, {})
 	})
+
+	app.get('/get-started', useStaticPage('get-started'))
 	
 	return app
 }
+
+type ExpressFunction = (req: Request, res: Response, next?: NextFunction) => void
+
+function useStaticPage(app: string, data?: any): ExpressFunction {
+	return (req, res) => {
+		if (app.slice(app.length - 5) !== '.html') app += '.html'
+		res.sendFile(changeDirectory(changeDirectory(__dirname, 2), '/assets/apps/' + app))
+	}
+}
+
 
 function useTemplate(template: string, page: string, res: any, data: any) {
 	const info: any = {
