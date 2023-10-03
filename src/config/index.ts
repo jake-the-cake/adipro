@@ -21,8 +21,8 @@ const CONFIG: Config = {
 		onConnect: returnConnectionMessage
 	},
 	www: {
-		templates: '/assets/templates',
-		pages: '/assets/pages'
+		templates: '/client/template',
+		pages: '/client/page'
 	}
 }
 
