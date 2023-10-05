@@ -3,14 +3,9 @@ import express, { NextFunction, Request, Response } from "express"
 import cors from 'cors'
 import CONFIG from "../config"
 import { ServerConfig } from "./types"
-import { Template, changeDirectory } from "./build"
+import { changeDirectory } from "./build"
 import fs from 'fs'
 import path from 'path'
-
-
-
-
-
 
 function expressServer(config: ServerConfig) {
 	const app = express()
@@ -25,7 +20,7 @@ function expressServer(config: ServerConfig) {
 		next()
 	})
 
-	app.get('/', createHtmlDoc({template: 'index', page: 'test'}))
+	app.get('/', createHtmlDoc({ template: 'index', page: 'test'}))
 
 	app.get('/get-started', useStaticPage('app/get-started'))
 	
@@ -45,7 +40,6 @@ function useStaticPage(app: string, data?: any): ExpressFunction {
 		if (app[0] === '/') app = app.slice(1)
 		if (app.slice(app.length - 5) !== '.html') app += '/index.html'
 		const file = path.join(changeDirectory(__dirname, 2), 'client', app)
-		// const
 		console.log(file)
 		
 		try {
@@ -58,13 +52,6 @@ function useStaticPage(app: string, data?: any): ExpressFunction {
 			console.error(error)
 			res.status(500).send('Server error.')
 		}
-
-		// const contentType = {
-    //     '.html': 'text/html',
-    //     '.css': 'text/css',
-    //     '.js': 'text/javascript',
-    // }
-		
 	}
 }
 
@@ -74,7 +61,12 @@ function useStaticPage(app: string, data?: any): ExpressFunction {
 
 interface HTMLDoc {
 	template: string
-	page: string
+	page?: string
+	app?: string
+	meta?: {
+			title?: string
+		}
+	data?: { [key: string]: any }
 }
 
 interface HTMLInfo {
@@ -83,37 +75,70 @@ interface HTMLInfo {
 
 type THtmlDoc = HTMLDoc & HTMLInfo
 
-function createHtmlDoc(document: HTMLDoc, data?: unknown): ExpressFunction {
+interface ExpressApiObjects {
+	req: Request
+	res: Response
+	next?: NextFunction
+}
+
+
+
+function createHtmlDoc(doc: HTMLDoc): ExpressFunction {
 	return (req, res) => {
-		const info: THtmlDoc | void = initHtmlDocObject(document)
-		if (!info) return res.send('OOPS!')
-		fs.access(info.template, fs.constants.F_OK, (error) => {
-			if (!error) {
-				return fs.readFile(info.template, (error, data) => {
-					if (!error) {
-						console.log(data)
-							return fs.access(info.page, fs.constants.F_OK, (error) => {
-								if (!error) {
-									return fs.readFile(info.page, (error, data) => {
-										if (!error) {
-											console.log(data)
-											
-											return res.status(200).end(data)
-										}
-										return res.status(500).send('Server error.')
-									})
-								}
-								return res.status(404).send('Can\'t find page.')
-							})
-						// return res.status(200).end(data)
-					}
-					return res.status(500).send('Server error.')
-				})
-			}
-			return res.status(404).send('Can\'t find template.')
-		})
+		const html = new QuiggleHtml(doc, { req, res })
+		// res.send('END')
 	}
 }
+
+class QuiggleHtml {
+	doc: HTMLDoc
+	api?: ExpressApiObjects
+	template?: string
+	page?: string
+	app?: string
+
+	constructor(doc: HTMLDoc, api: ExpressApiObjects) {
+		this.doc = doc
+		this.api = api
+		this.getComponents()
+	}
+
+	static useErrorPage(options?: any) {
+		function returnErrorPage() {
+			let html: string = QuiggleHtml.getHtmlDoc('template', 'error')
+			const variables: string[] = []
+			html.split('${').forEach((item: string) => {
+				if (item.split('}').length <= 1) return
+				variables.push(item.split('}')[0].trim())
+			})
+			variables.forEach((variable: string) => {
+				let obj: any = {...options}
+				variable.split('.').forEach((item: string) => {
+					if (obj[item]) obj = obj[item]
+				})
+				html = html.replace('${ ' + variable + ' }', obj || 'Nope')
+			})
+			return html
+		}
+
+		switch (options.error.status) {
+			case 400:
+				return returnErrorPage()
+			default:
+				return 'IDK what happened, man!'
+		}
+	}
+
+	static getHtmlDoc(type: string, name: string) {
+		return fs.readFileSync([changeDirectory(__dirname, 2), 'client', type, name + '.html'].join('/')).toString()
+	}
+
+	getComponents() {
+		if (!this.doc.template) return this.api?.res.send(QuiggleHtml.useErrorPage({error: { status: 400 }}))
+		return this.api?.res.send('To be continued...')
+	}
+}
+
 
 function initHtmlDocObject(document: HTMLDoc): (HTMLDoc & HTMLInfo) | void {
 	if (!document.template) return console.log('ERROR! No template provided.')
