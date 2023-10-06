@@ -3,9 +3,112 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Error</title>
+	<title>Error! - Adipro Health</title>
+	<style>
+		body {
+			display: grid;
+			place-items: center;
+			width: 100vw;
+			min-height: 100vh;
+			font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+			background-color: hsl(330, 100%, 81%, .1);
+		}
+		.error__container {
+			background-color: white;
+			max-width: 40rem;
+			box-shadow: 0 2px 8px -2px black;
+			display: flex;
+			flex-direction: column;
+		}
+		.error__header {
+			background-color: tomato;
+			color: white;
+			display: flex;
+			justify-content: space-between;
+			padding: .5rem;
+		}
+		.error__link a {
+			color: hsl(220, 88%, 55%, .8);
+			text-decoration: none;
+			transition: color .3s ease;
+			font-size: .7rem;
+			font-weight: 700;
+			letter-spacing: 1px;
+		}
+		.error__link a:hover {
+			color: hsl(220, 88%, 55%);
+		}
+		.error__brand {
+			font-weight: 700;
+		}
+		.error__brand > span {
+			color: black;
+		}
+		.error__info {
+			padding-inline: 3rem;
+			margin-top: 3rem;
+			display: flex;
+			gap: 2rem;
+			align-items: center;
+		}
+		.error__status > * {
+			all: unset;
+			font-weight: 700;
+		}
+		.error__status {
+			box-shadow: 0 2px 8px -2px black;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			border-radius: 9999px;
+			/* aspect-ratio: 1; */
+			background-color: tomato;
+			padding: 1.5rem 1rem 2rem;
+		}
+		.error__message {
+			height: 100%;
+			text-align: center;
+			letter-spacing: 1px;
+			line-height: 1.5;
+		}
+		.error__status h2 {
+			color: white;
+			font-size: 5rem;
+			line-height: .8;
+		}
+		.error__stack {
+			margin: 3rem;
+			padding: 1rem;
+			background-color: hsl(330, 100%, 81%, .1);
+			border: 1px solid tomato;
+			font-family: monospace;
+			line-height: 2;
+		}
+	</style>
 </head>
 <body>
-	Error ${ error.status } just happened...
+	<main class="error__container">
+		<div class="error__header">
+			<div class="error__brand"><span>Adipro</span>Health</div>
+			<div class="error__link"><a href="/">Go to Homepage</a></div>
+		</div>
+		<div class="error__info">
+			<div class="error__status">
+				<p>
+					${ error.name }
+				</p>
+				<h2>
+					${ error.status }
+				</h2>
+			</div>
+			<div class="error__message">
+				${ error.message }
+			</div>
+		</div>
+		<div class="error__stack">
+			${ error.stack }
+		</div>
+	</main>
 </body>
 </html>
