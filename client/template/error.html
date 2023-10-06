@@ -6,8 +6,8 @@
 	<title>Error! - Adipro Health</title>
 	<style>
 		body {
-			display: grid;
-			place-items: center;
+			display: flex;
+			justify-content: center;
 			width: 100vw;
 			min-height: 100vh;
 			font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -15,6 +15,9 @@
 		}
 		.error__container {
 			background-color: white;
+			margin-block: 2rem;
+			height: fit-content;
+			width: fit-content;
 			max-width: 40rem;
 			box-shadow: 0 2px 8px -2px black;
 			display: flex;
@@ -28,7 +31,7 @@
 			padding: .5rem;
 		}
 		.error__link a {
-			color: hsl(220, 88%, 55%, .8);
+			color: hsl(240, 80%, 55%);
 			text-decoration: none;
 			transition: color .3s ease;
 			font-size: .7rem;
@@ -36,7 +39,7 @@
 			letter-spacing: 1px;
 		}
 		.error__link a:hover {
-			color: hsl(220, 88%, 55%);
+			color: hsl(220, 88%, 55%, .8);
 		}
 		.error__brand {
 			font-weight: 700;
@@ -62,9 +65,9 @@
 			align-items: center;
 			justify-content: center;
 			border-radius: 9999px;
-			/* aspect-ratio: 1; */
+			aspect-ratio: 1;
 			background-color: tomato;
-			padding: 1.5rem 1rem 2rem;
+			padding: .5rem 1rem 1.5rem;
 		}
 		.error__message {
 			height: 100%;
