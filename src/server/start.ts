@@ -23,7 +23,7 @@ function expressServer(config: ServerConfig) {
 	})
 
 	app.get('/', createHtmlDoc({
-		template: 'apps',
+		template: 'app',
 		app: 'get-started/index',
 		meta: {
 			title: 'Get Started with Adipro\'s Health Quiz'
@@ -57,7 +57,8 @@ function useStaticPage(app: string, data?: any): ExpressFunction {
 
 function createHtmlDoc(doc: HTMLDoc): ExpressFunction {
 	return (req, res) => {
-		const html = new QuiggleHtml(doc, { req, res })
+		// const html = 
+		new QuiggleHtml(doc, { req, res })
 		// res.send('END')
 	}
 }

@@ -78,14 +78,19 @@ body {
 
 .form-app__title--outer {
   overflow: hidden;
-  transition: width .3s ease;
+  /* transition: width .3s ease; */
   position: relative;
 }
 
 .form-app__title--inner {
   font-size: 1.4rem;
   padding: .3rem;
-  position: absolute;
+  position: relative;
+  transition: left .3s ease;
   left: 0px;
   top: 0px;
+}
+
+.form-app__hidden {
+  left: -100px;
 }
