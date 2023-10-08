@@ -6,6 +6,7 @@ interface HTMLDoc {
 			title?: string
 		}
 	data?: { [key: string]: any }
+	error?: Error & {[key: string]: any}
 }
 
 export {

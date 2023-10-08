@@ -57,7 +57,6 @@ function useStaticPage(app: string, data?: any): ExpressFunction {
 
 function createHtmlDoc(doc: HTMLDoc): ExpressFunction {
 	return (req, res) => {
-		// const html = 
 		new QuiggleHtml(doc, { req, res })
 		// res.send('END')
 	}

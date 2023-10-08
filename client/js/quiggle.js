@@ -1,3 +1,7 @@
+const utils = {
+	parseAllInts: (value) => Number(value.match(/[0-9]/g)?.join('')) || 0
+}
+
 class QuiggleDom {
 
 	constructor(app) {
@@ -26,14 +30,6 @@ class QuiggleForm {
 	}
 }
 
-// const config = {
-// 	currentPage: 1,
-// 	title: (index) => `form-page-${ index + 1 }-title`
-// }
-
-const utils = {
-	parseAllInts: (value) => Number(value.match(/[0-9]/g)?.join('')) || 0
-}
 
 class QuiggleMultiPageForm {
 	constructor(id, { classes } = {}) {
@@ -56,7 +52,7 @@ class QuiggleMultiPageForm {
 	}
 	
 	static classes = {
-		hideTitle: 'form-title__hidden--left'
+		hideTitle: 'hide-left'
 	}
 
 	useClass() {
