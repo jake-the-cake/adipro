@@ -2,12 +2,9 @@ import HTTP from "http"
 import express from "express"
 import cors from 'cors'
 import CONFIG from "../config"
-import { ExpressFunction, ServerConfig } from "./types"
-import { changeDirectory } from "./build"
-import fs from 'fs'
-import path from 'path'
-import { HTMLDoc } from "../quiggle/ssr/types"
-import QuiggleHtml from "../quiggle/ssr/html"
+import {  ServerConfig } from "./types"
+import { createHtmlDoc, useStaticPage } from "../controllers/html"
+import { TestRouter } from "../routes"
 
 function expressServer(config: ServerConfig) {
 	const app = express()
@@ -22,6 +19,8 @@ function expressServer(config: ServerConfig) {
 		next()
 	})
 
+	app.use('/', TestRouter)
+
 	app.get('/', createHtmlDoc({
 		template: 'app',
 		app: 'get-started/index',
@@ -35,32 +34,7 @@ function expressServer(config: ServerConfig) {
 	return app
 }
 
-function useStaticPage(app: string, data?: any): ExpressFunction {
-	return (req, res) => {
-		if (app[0] === '/') app = app.slice(1)
-		if (app.slice(app.length - 5) !== '.html') app += '/index.html'
-		const file = path.join(changeDirectory(__dirname, 2), 'client', app)
-		console.log(file)
-		
-		try {
-			const htmlContent = fs.readFileSync(file, 'utf-8')
 
-			res.setHeader('Content-Type', 'text/html')
-
-			res.send(htmlContent)
-		} catch (error) {
-			console.error(error)
-			res.status(500).send('Server error.')
-		}
-	}
-}
-
-function createHtmlDoc(doc: HTMLDoc): ExpressFunction {
-	return (req, res) => {
-		new QuiggleHtml(doc, { req, res })
-		// res.send('END')
-	}
-}
 
 function startServer() {
 	const config = CONFIG.server

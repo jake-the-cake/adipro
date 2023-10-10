@@ -1,3 +1,4 @@
+import { dbConnection } from "../database"
 import { startServer } from "./start"
 
-startServer()
+dbConnection(startServer)

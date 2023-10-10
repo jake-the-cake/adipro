@@ -6,12 +6,11 @@ dotenv.config()
 
 interface Config {
 	server: ServerConfig
-	www: WwwConfig
+	data: DataConfig
 }
 
-interface WwwConfig {
-	templates: string
-	pages: string
+interface DataConfig {
+	connect: string | null
 }
 
 const CONFIG: Config = {
@@ -20,9 +19,9 @@ const CONFIG: Config = {
 		name: 'Adipro Health',
 		onConnect: returnConnectionMessage
 	},
-	www: {
-		templates: '/client/template',
-		pages: '/client/page'
+	data: {
+		connect: process.env.MONGO_URI || null,
+		// pages: '/client/page'
 	}
 }
 
