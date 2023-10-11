@@ -22,7 +22,50 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 2rem;
+}
+
+.largenav__container {
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  background-color: hsl(var(--dark), .5);
+  display: grid;
+}
+
+.largenav__logo {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  background-color: red;
+}
+
+.largenav__links {
+  grid-column: 2 / 4;
+  grid-row: 1 / 2;
+  background-color: yellow;
+
+  & ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+  }
+}
+
+.largenav__image {
+  background-color: green;
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+}
+
+.largenav__quote {
+  background-color: blue;
+  grid-column: 2 / 4;
+  grid-row: 4 / 5;
+}
+
+.largenav__action {
+  background-color: peru;
+  grid-row: 3 / 5;
 }
 
 .slimnav__container {

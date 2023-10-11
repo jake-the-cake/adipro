@@ -21,7 +21,6 @@ const CONFIG: Config = {
 	},
 	data: {
 		connect: process.env.MONGO_URI || null,
-		// pages: '/client/page'
 	}
 }
 

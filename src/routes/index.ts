@@ -1,11 +1,14 @@
 import { Router } from "express"
+import { ClientRouter } from "./client"
+import { ApiRouter } from "./api"
+import { AuthRouter } from "./auth"
+
 
 const router = Router()
-
-router.get('/gotcha', (req, res) => {
-	res.send('gotcha')
-})
-
-export {
-	router as TestRouter
+const routes = {
+	ClientRouter,
+	ApiRouter,
+	AuthRouter
 }
+
+export default routes

@@ -2,9 +2,9 @@ import HTTP from "http"
 import express from "express"
 import cors from 'cors'
 import CONFIG from "../config"
-import {  ServerConfig } from "./types"
-import { createHtmlDoc, useStaticPage } from "../controllers/html"
-import { TestRouter } from "../routes"
+import { ServerConfig } from "./types"
+import { createHtmlDoc } from "../controllers/html"
+import routes from "../routes"
 
 function expressServer(config: ServerConfig) {
 	const app = express()
@@ -14,27 +14,24 @@ function expressServer(config: ServerConfig) {
 
 	app.use(express.static('client', {}))
 	
-	app.get('*', (req, res, next) => {
+	app.get('*', (req, _, next) => {
 		console.log(req.url)
 		next()
 	})
 
-	app.use('/', TestRouter)
+	app.use('/auth', routes.AuthRouter)
+	app.use('/api', routes.ApiRouter)
+	app.use('/', routes.ClientRouter)
 
-	app.get('/', createHtmlDoc({
-		template: 'app',
-		app: 'get-started/index',
-		meta: {
-			title: 'Get Started with Adipro\'s Health Quiz'
-		}
-	}))
-
-	app.get('/get-started', useStaticPage('app/get-started'))
-	
+	app.route('*')
+		.get(
+			createHtmlDoc({
+			template: 'nevergonnagiveyouup',
+			app: 'nevergonnaletyoudown'
+		}))
+		.all((req, res) => { res.status(404).json({	message: `${ req.url } is an invalid endpoint.`, status: res.statusCode, ok: false })})
 	return app
 }
-
-
 
 function startServer() {
 	const config = CONFIG.server

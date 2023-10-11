@@ -13,7 +13,7 @@ class QuiggleHtml {
 		this.doc = doc
 		this.api = api
 		this.getComponents()
-		this.renderHtmlDoc()
+		if (!this.api.res.headersSent) this.renderHtmlDoc()
 	}
 
 	static pattern = new RegExp('{![\\s\\S]*?!}', 'g')
@@ -33,7 +33,7 @@ class QuiggleHtml {
 
 	climbDownObjectTree(obj: any, props: string[]) {
 		props.forEach((prop: string) => {
-			if (obj && prop in obj) obj = obj[prop]
+			if (obj && obj[prop]) obj = obj[prop]
 		})
 		return obj
 	}
@@ -48,7 +48,7 @@ class QuiggleHtml {
 			obj.status = status
 			obj = this.climbDownObjectTree(obj, props)
 			props.forEach((prop: string) => {
-				if (obj && prop in obj) obj = obj[prop]
+				if (obj && obj[prop]) obj = obj[prop]
 			})
 			this.updateHtml(instance, obj || instance)
 		})
