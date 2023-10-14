@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', startApp)
 
-const form = new QuiggleMultiPageForm('get-started-app')
 
 const pages = [
 	{
@@ -34,6 +33,8 @@ const pages = [
 	}
 ]
 
+const form = new QuiggleMultiPageForm('get-started-app', { pages })
+
 function startApp() {
 	const app = document.getElementById('get-started-app')
 	if (!app) return console.error(new Error('Application not found.'))
@@ -43,7 +44,4 @@ function startApp() {
 		title.id = `form-page-${ i + 1 }-title`
 	})
 	form.changeActiveElement('hide-left', 'title')
-	
-
-
 }

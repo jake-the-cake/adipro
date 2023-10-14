@@ -1,4 +1,10 @@
 import { dbConnection } from "../database"
+import { displayError } from "../error"
 import { startServer } from "./start"
 
-dbConnection(startServer)
+try {
+  dbConnection(startServer)
+}
+catch(err: any) {
+  displayError(err)
+}
