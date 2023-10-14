@@ -1,4 +1,4 @@
-import { changeDirectory } from "../../server/build"
+import { changeDirectory } from "../utils"
 import { ExpressApiObjects } from "../../server/types"
 import { HTMLDoc } from "./types"
 import fs from 'fs'

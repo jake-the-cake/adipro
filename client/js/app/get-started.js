@@ -2,6 +2,38 @@ window.addEventListener('DOMContentLoaded', startApp)
 
 const form = new QuiggleMultiPageForm('get-started-app')
 
+const pages = [
+	{
+		title: 'The Basics',
+		blob: 'Testing',
+		elements: [
+			{
+				type: 'input',
+				label: 'Name',
+				stack: 'h',
+				name: 'name'
+			},
+			{
+				type: 'row',
+				elements: [
+					{
+						type: 'input',
+						label: 'Zip Cope',
+						stack: 'v',
+						name: 'zip'
+					},
+					{
+						type: 'input',
+						label: 'Age',
+						stack: 'v',
+						name: 'age'
+					}
+				]
+			}
+		]
+	}
+]
+
 function startApp() {
 	const app = document.getElementById('get-started-app')
 	if (!app) return console.error(new Error('Application not found.'))
@@ -10,6 +42,8 @@ function startApp() {
 	titles.forEach((title, i) => {
 		title.id = `form-page-${ i + 1 }-title`
 	})
-
 	form.changeActiveElement('hide-left', 'title')
+	
+
+
 }

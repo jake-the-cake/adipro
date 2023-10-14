@@ -1,6 +1,6 @@
 import QuiggleHtml from "../quiggle/ssr/html"
 import { HTMLDoc } from "../quiggle/ssr/types"
-import { changeDirectory } from "../server/build"
+import { changeDirectory } from "../quiggle/utils"
 import { ExpressFunction } from "../server/types"
 import fs from 'fs'
 import path from 'path'
