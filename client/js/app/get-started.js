@@ -1,39 +1,39 @@
 window.addEventListener('DOMContentLoaded', startApp)
 
 
-const pages = [
-	{
-		title: 'The Basics',
-		blob: 'Testing',
-		elements: [
-			{
-				type: 'input',
-				label: 'Name',
-				stack: 'h',
-				name: 'name'
-			},
-			{
-				type: 'row',
-				elements: [
-					{
-						type: 'input',
-						label: 'Zip Cope',
-						stack: 'v',
-						name: 'zip'
-					},
-					{
-						type: 'input',
-						label: 'Age',
-						stack: 'v',
-						name: 'age'
-					}
-				]
-			}
-		]
-	}
-]
+// const pages = [
+// 	{
+// 		title: 'The Basics',
+// 		blob: 'Testing',
+// 		elements: [
+// 			{
+// 				type: 'input',
+// 				label: 'Name',
+// 				stack: 'h',
+// 				name: 'name'
+// 			},
+// 			{
+// 				type: 'row',
+// 				elements: [
+// 					{
+// 						type: 'input',
+// 						label: 'Zip Cope',
+// 						stack: 'v',
+// 						name: 'zip'
+// 					},
+// 					{
+// 						type: 'input',
+// 						label: 'Age',
+// 						stack: 'v',
+// 						name: 'age'
+// 					}
+// 				]
+// 			}
+// 		]
+// 	}
+// ]
 
-const form = new QuiggleMultiPageForm('get-started-app', { pages })
+const form = new QuiggleMultiPageForm('get-started-app')
 
 function startApp() {
 	const app = document.getElementById('get-started-app')

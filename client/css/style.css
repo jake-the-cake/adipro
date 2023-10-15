@@ -206,3 +206,12 @@ body {
   letter-spacing: 1.4px;
   line-height: 1.4;
 }
+
+.form__element--h {
+  display: flex;
+  gap: 1rem;
+}
+
+.form__element--h input {
+  flex: 1;
+}

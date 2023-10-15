@@ -41,17 +41,15 @@ class QuiggleMultiPageForm {
 			this.titleContent.push(element.firstElementChild)
 		})
 
-		this.buildPages(pages)
-
-		// this.forms = Array.from(document.getElementById('form-display').f)
-		// this.forms.forEach((form) => {
-		// 	form.querySelector('button').onpointerup = (e) => {
-		// 		e.preventDefault()
-		// 		this.currentPage++
-		// 		this.changeActiveElement(this.useClass().hideTitle)
-		// 	}
-		// })
-		// if (classes) this.classes = classes
+		this.forms = Array.from(document.getElementById('form-display').children)
+		this.forms.forEach((form) => {
+			form.querySelector('button').onpointerup = (e) => {
+				e.preventDefault()
+				this.currentPage++
+				this.changeActiveElement(this.useClass().hideTitle)
+			}
+		})
+		if (classes) this.classes = classes
 	}
 	
 	static classes = {
@@ -69,22 +67,5 @@ class QuiggleMultiPageForm {
 			if (!element.classList.contains(className)) QuiggleDom.addClass(element, className)
 		})
 		QuiggleDom.removeClass(activeElement, className)
-	}
-
-	buildPages(pages) {
-		const display = document.getElementById('form-display')
-		pages.forEach((page, pageIndex) => {
-			this.titleElements[pageIndex].innetText = page.title
-			const form = document.createElement('form')
-			QuiggleDom.addClass(form, 'form__container')
-			page.elements.forEach(element => {
-				console.log(element)
-				if (element.type !== 'row') {
-					const element = document.createElement(type)
-
-					if (element.stack === 'h') return
-				}
-			})
-		})
 	}
 }
