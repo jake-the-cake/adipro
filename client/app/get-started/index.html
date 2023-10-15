@@ -30,15 +30,20 @@
       </div>
       <div class="form__row">
         <div class="form__element--v">
-          <label for="name">Email</label>
+          <ul class="form-checkbox">
+            <label for="contact-method">Preferred Contact</label>
+            <li><input type="radio" name="contact-method" value="phone">Phone</input></li>
+            <li><input type="radio" name="contact-method" value="email">Email</input></li>
+            <li><input type="radio" name="contact-method" value="both">Both</input></li>
+          </ul>
           <input type="text" name="email" />
         </div>
         <div class="form__element--v">
-          <label for="name">Email</label>
+          <label for="email">Email</label>
           <input type="text" name="email" />
         </div>
         <div class="form__element--v">
-          <label for="name">Cell Phone</label>
+          <label for="phone">Cell Phone</label>
           <input type="text" name="phone" />
         </div>
       </div>
