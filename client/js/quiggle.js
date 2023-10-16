@@ -1,11 +1,20 @@
 const utils = {
-	parseAllInts: (value) => Number(value.match(/[0-9]/g)?.join('')) || 0
+	parseAllInts: (value) => Number(value.match(/[0-9]/g)?.join('')) || 0,
+	useAsString: (value) => { 
+		if (!value) value = ''
+		return value
+	},
+	usePath: (href) => { if (!href || href[0] !== '/') return '/' + utils.useAsString(href)}
 }
 
 class QuiggleDom {
 
 	constructor(app) {
 		this.app = app
+	}
+
+	static useLink(href) {
+		window.location.href = utils.usePath(href)
 	}
 
 	static addClass(element, name) {
