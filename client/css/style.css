@@ -1,6 +1,6 @@
 :root {
-  --primary-hue: 212;
-  --secondary-hue: 122;
+  --primary-hue: 12;
+  --secondary-hue: 72;
 
   --primary: var(--primary-hue), 88%, 36%;
   --secondary: var(--secondary-hue), 88%, 64%;
@@ -35,40 +35,70 @@ body {
 .largenav__logo {
   grid-column: 1 / 2;
   grid-row: 1 / 3;
-  font-size: 3rem;
-  /* background-color: red; */
+  font-size: 4rem;
+  color: hsl(var(--light), .8);
+  display: grid;
+  place-items: center;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .largenav__links {
   grid-column: 2 / 4;
   grid-row: 1 / 2;
-  background-color: yellow;
+  background-color: hsl(var(--dark), .8);
+  color: hsl(var(--secondary), .9);
+}
 
-  & ul {
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-    justify-content: end;
-  }
+.largenav__links ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  justify-content: end;
+  align-items: center;
 }
 
 .largenav__image {
   grid-column: 2 / 4;
   grid-row: 2 / 4;
+  position: relative;
+  max-height: 250px;
+  overflow: hidden;
 }
 
 .largenav__image img {
   width: 100%;
+  position: absolute;
+  bottom: 0px;
 }
 
 .largenav__quote {
-  background-color: blue;
+  color: hsl(var(--light), .8);
+  font-size: 1.2rem;
+  letter-spacing: 3px;
   grid-column: 2 / 4;
   grid-row: 4 / 5;
+  text-align: center;
+  padding: 1rem;
 }
 
 .largenav__action {
   grid-row: 3 / 5;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  padding: 2rem;
+  background-color: hsl(var(--light), .2);
+  text-align: center;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  line-height: 2;
+  color: hsl(var(--light), .8);
+  border-radius: 1rem;
 }
 
 .slimnav__container {
@@ -217,4 +247,33 @@ body {
 
 .form__element--h input {
   flex: 1;
+}
+
+.btn {
+  cursor: pointer;
+  outline: none;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 9999px;
+}
+
+.btn-primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--light));
+  border-color: transparent;
+}
+
+.btn-lg {
+  padding: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.btn-sm {
+  font-size: .8rem;
+  padding: .5rem .3rem;
+}
+
+.border-light {
+  border-color: white;
 }
