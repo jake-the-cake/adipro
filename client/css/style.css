@@ -1,6 +1,6 @@
 :root {
   --primary-hue: 12;
-  --secondary-hue: 72;
+  --secondary-hue: 52;
 
   --primary: var(--primary-hue), 88%, 36%;
   --secondary: var(--secondary-hue), 88%, 64%;
@@ -47,8 +47,10 @@ body {
 .largenav__links {
   grid-column: 2 / 4;
   grid-row: 1 / 2;
-  background-color: hsl(var(--dark), .8);
+  background-image: linear-gradient(0deg, hsl(var(--dark), .7), hsl(var(--primary), .5));
+  box-shadow: -1px 1px 10px 2px hsl(var(--dark));
   color: hsl(var(--secondary), .9);
+  border-radius: 0 0 0 1rem;
 }
 
 .largenav__links ul {
@@ -57,20 +59,32 @@ body {
   gap: 1rem;
   justify-content: end;
   align-items: center;
+  margin-right: 1rem;
+  height: fit-content;
+}
+
+.largenav__links li {
+  letter-spacing: 1.3px;
+  font-variant: small-caps;
+  text-shadow: 1px 0px 2px hsl(var(--light)), -1px 0px 2px hsl(var(--dark));
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 .largenav__image {
   grid-column: 2 / 4;
   grid-row: 2 / 4;
   position: relative;
-  max-height: 250px;
+  max-height: 300px;
   overflow: hidden;
-}
-
-.largenav__image img {
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
+  margin: 1rem;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 20px 1px hsl(var(--dark)),
+              0 2px 10px -2px hsl(var(--secondary), .6);
+  z-index: 10;
+  background-image: url(/img/wellness.jpg);
+  background-position: center center;
+  background-size: cover;
 }
 
 .largenav__quote {
@@ -85,12 +99,12 @@ body {
 
 .largenav__action {
   grid-row: 3 / 5;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+}
+
+.largenav__action > div {
   justify-content: center;
+  display: flex;
   align-items: center;
-  margin: 1rem;
   padding: 2rem;
   background-color: hsl(var(--light), .2);
   text-align: center;
@@ -99,6 +113,9 @@ body {
   line-height: 2;
   color: hsl(var(--light), .8);
   border-radius: 1rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1rem;
 }
 
 .slimnav__container {
